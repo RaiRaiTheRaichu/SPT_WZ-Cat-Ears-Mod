@@ -1,0 +1,32 @@
+{
+    "gear_catears_blue":
+    {
+        "Id": "66bbacb0a27a06bfa61433a0",
+        "Template": "5c0e66e2d174af02a96252f4",
+        "BundlePath": "assets/content/items/equipment/helmet_catears/gear_catears_blue.bundle"
+    },
+    "gear_catears_green":
+    {
+        "Id": "66bbacb96c335e5194aee8a4",
+        "Template": "5c0e66e2d174af02a96252f4",
+        "BundlePath": "assets/content/items/equipment/helmet_catears/gear_catears_green.bundle"
+    },
+    "gear_catears_pink":
+    {
+        "Id": "66bbacbca50485d6f7e15d24",
+        "Template": "5c0e66e2d174af02a96252f4",
+        "BundlePath": "assets/content/items/equipment/helmet_catears/gear_catears_pink.bundle"
+    },
+    "gear_catears_red":
+    {
+        "Id": "66bbacbe4086f691350c139c",
+        "Template": "5c0e66e2d174af02a96252f4",
+        "BundlePath": "assets/content/items/equipment/helmet_catears/gear_catears_red.bundle"
+    },
+    "gear_catears_yellow":
+    {
+        "Id": "66bbacc1ff384253a60e7cd7",
+        "Template": "5c0e66e2d174af02a96252f4",
+        "BundlePath": "assets/content/items/equipment/helmet_catears/gear_catears_yellow.bundle"
+    }
+}

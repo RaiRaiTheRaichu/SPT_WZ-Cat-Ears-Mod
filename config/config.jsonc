@@ -1,0 +1,23 @@
+{
+	// When true, the cat ear headband will copy the same armor stats and hitbox as the SLAAP plate.
+	// Set to false to make the headband cosmetic-only.
+	// If false, it is recommended to set "useAlternateTrade" to true, to remove the expensive trade requirements. 
+	"ArmoredCatEars": true,
+
+	// Want to change the trade requirement?
+	// Set "useAlternateTrade" to true, and edit the settings below.
+	// When set to false, it will copy the trade requirements of the SLAAP plate instead.
+	"UseAlternateTrade": false,
+
+	// The alternate trade filled out below by default will be the same as a cosmetic hat on Ragman LL1.
+	"AlternateTrade":
+	{
+		"TraderId": "5ac3b934156ae10c4430e83c",		// Ragman
+		"Barter":
+		{
+			"Id": "5449016a4bdc2d6f028b456f",	// Roubles
+			"Count": 1823
+		},
+		"LoyaltyLevel":  1
+	}
+}

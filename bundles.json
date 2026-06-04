@@ -1,0 +1,43 @@
+{
+  "manifest": [
+      {
+          "dependencyKeys": [],
+          "key": "assets/content/items/equipment/helmet_catears/gear_catears_mesh.bundle"
+      },
+      {
+          "dependencyKeys": [
+              "assets/content/items/equipment/helmet_catears/gear_catears_mesh.bundle",
+              "shaders"
+          ],
+          "key": "assets/content/items/equipment/helmet_catears/gear_catears_blue.bundle"
+      },
+      {
+          "dependencyKeys": [
+              "assets/content/items/equipment/helmet_catears/gear_catears_mesh.bundle",
+              "shaders"
+          ],
+          "key": "assets/content/items/equipment/helmet_catears/gear_catears_pink.bundle"
+      },
+      {
+          "dependencyKeys": [
+              "assets/content/items/equipment/helmet_catears/gear_catears_mesh.bundle",
+              "shaders"
+          ],
+          "key": "assets/content/items/equipment/helmet_catears/gear_catears_green.bundle"
+      },
+      {
+          "dependencyKeys": [
+              "assets/content/items/equipment/helmet_catears/gear_catears_mesh.bundle",
+              "shaders"
+          ],
+          "key": "assets/content/items/equipment/helmet_catears/gear_catears_yellow.bundle"
+      },
+      {
+          "dependencyKeys": [
+              "assets/content/items/equipment/helmet_catears/gear_catears_mesh.bundle",
+              "shaders"
+          ],
+          "key": "assets/content/items/equipment/helmet_catears/gear_catears_red.bundle"
+      }
+  ]
+}
