@@ -30,7 +30,7 @@ The following packages installed:
 - SPTarkov.Server.Core (`4.0.0`)
 (You can select `Manage NuGet Packages...` within the Dependencies tab of Visual Studio to install them. Pay special attention to the version being installed, mods compiled with packages marked `4.0.13`, for example, will not run on any version below that.)
 
-Open AllTheClothes.sln with Visual Studio and build the mod in Release mode.
+Open WZCatEars.sln with Visual Studio and build the mod in Release mode.
 Alternatively, run `dotnet build -c Release` from the project directory root.
 
 The output will be stored in the project's `bin\Release\` folder.
