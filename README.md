@@ -1,10 +1,9 @@
-# Warzone Cat Ears v2.0.0
+# Warzone Cat Ears v2.0.1
 
 Author: RaiRaiTheRaichu
 
 Additional credits:
 - SamSWAT for the initial mod this is inherited from, "Crye Precision Airframe Helmet From Warzone".
-
 
 ### ---BUILT FOR SPT VERSION 4.0.13---
 
@@ -16,7 +15,6 @@ We've got blue, pink, red, green, and yellow.
 Oh, and of course you don't have to forego protection just for style. Enabled by default, I have added a config option to copy the protection/hitbox of a normal SLAAP plate, so you don't have to lose out on your armor. Does it make sense? Probably not, but who cares? Cat ears, bro.
 
 Ня.
-
 
 ## ---BUILD INFO---
 
@@ -40,7 +38,6 @@ https://drive.google.com/file/d/1VuJfiC7yiatkj6igNX-kS-oiFSS9wddx/view
 
 I will try to keep this link accurate and up-to-date with the required bundles to run the mod.
 
-
 ## ---INSTALL INFO---
 
 How to install:
@@ -63,12 +60,13 @@ If you're updating from an older version, please be sure to delete the old mod f
 - Rewrite for SPT version 4.0+.
 - Added advanced trade offer customization in the config.
 
+#### v2.0.1 Changelog:
+- Fixed an OS-dependent issue with loading database and config files
 
 ## ---CONTACT---
 
 @RaiRaiTheRaichu - Discord
 https://forge.sp-tarkov.com/user/3576/rairaitheraichu
-
 
 ## ---LICENSE---
 

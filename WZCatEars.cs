@@ -20,7 +20,7 @@ namespace WZCatEars
         public override string Name { get; init; } = "Warzone Cat Ears";
         public override string Author { get; init; } = "RaiRaiTheRaichu";
         public override List<string>? Contributors { get; init; }
-        public override SemanticVersioning.Version Version { get; init; } = new("2.0.0");
+        public override SemanticVersioning.Version Version { get; init; } = new("2.0.1");
         public override SemanticVersioning.Range SptVersion { get; init; } = new("~4.0.0");
         public override List<string>? Incompatibilities { get; init; }
         public override Dictionary<string, SemanticVersioning.Range>? ModDependencies { get; init; }
@@ -52,7 +52,7 @@ namespace WZCatEars
 
             GenerateItems();
 
-            string[] files = Directory.GetFiles(System.IO.Path.Join(ModPath, "db\\locale"));
+            string[] files = Directory.GetFiles(System.IO.Path.Join(ModPath, "db", "locale"));
             
             if (files.Length > 0) 
                 GenerateLocalization(files);
@@ -157,7 +157,7 @@ namespace WZCatEars
                 if (!filenames.Contains(langKey.Key))
                 {
                     var localeFile = modHelper.GetJsonDataFromFile<Dictionary<string, string>>(
-                        System.IO.Path.Join(ModPath, "db\\locale"), "en.json");
+                        System.IO.Path.Join(ModPath, "db", "locale"), "en.json");
 
                     if (databaseService.GetLocales().Global.TryGetValue(langKey.Key, out var lazyloadedValue))
                     {
