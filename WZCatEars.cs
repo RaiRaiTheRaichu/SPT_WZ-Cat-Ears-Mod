@@ -20,7 +20,7 @@ namespace WZCatEars
         public override string Name { get; init; } = "Warzone Cat Ears";
         public override string Author { get; init; } = "RaiRaiTheRaichu";
         public override List<string>? Contributors { get; init; }
-        public override SemanticVersioning.Version Version { get; init; } = new("2.0.1");
+        public override SemanticVersioning.Version Version { get; init; } = new("2.0.2");
         public override SemanticVersioning.Range SptVersion { get; init; } = new("~4.0.0");
         public override List<string>? Incompatibilities { get; init; }
         public override Dictionary<string, SemanticVersioning.Range>? ModDependencies { get; init; }
@@ -237,17 +237,19 @@ namespace WZCatEars
                         trader.Value.Assort.BarterScheme[newAssort.Id] = trader.Value.Assort.BarterScheme[tradeItem.Id];
                         trader.Value.Assort.LoyalLevelItems[newAssort.Id] = trader.Value.Assort.LoyalLevelItems[tradeItem.Id];
 
-                        if (trader.Value.QuestAssort["success"]?.ContainsKey(tradeItem.Id) ?? false)
+                        if (trader.Value.QuestAssort.TryGetValue("success", out var questSuccess)
+                            && questSuccess.ContainsKey(tradeItem.Id))
                         {
-                            trader.Value.QuestAssort["success"].Add(
-                                newAssort.Id, 
-                                trader.Value.QuestAssort["success"][tradeItem.Id]);
+                            questSuccess.TryAdd(
+                                newAssort.Id,
+                                questSuccess[tradeItem.Id]
+                            );
                         }
                     }
                 }
 
                 // Handbook price
-                HandbookItem handbookEntry = databaseService.GetHandbook().Items.Find(entry 
+                HandbookItem handbookEntry = databaseService.GetHandbook().Items.Find(entry
                     => entry.Id == itemEntry.Value.Template);
 
                 HandbookItem newHandbookEntry = new()

@@ -1,4 +1,4 @@
-# Warzone Cat Ears v2.0.1
+# Warzone Cat Ears v2.0.2
 
 Author: RaiRaiTheRaichu
 
@@ -62,6 +62,9 @@ If you're updating from an older version, please be sure to delete the old mod f
 
 #### v2.0.1 Changelog:
 - Fixed an OS-dependent issue with loading database and config files
+
+#### v2.0.2 Changelog:
+- Fixed an issue where assorts could fail to generate when using custom traders.
 
 ## ---CONTACT---
 
