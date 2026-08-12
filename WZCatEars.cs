@@ -6,33 +6,38 @@ using SPTarkov.Server.Core.Helpers;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
 using SPTarkov.Server.Core.Models.Spt.Mod;
+using SPTarkov.Server.Core.Models.Spt.Tables;
 using SPTarkov.Server.Core.Models.Utils;
 using SPTarkov.Server.Core.Servers;
 using SPTarkov.Server.Core.Services;
+using SPTarkov.Server.Core.Helpers.Server;
 using System.Formats.Tar;
 using System.Reflection;
+using SPTarkov.Common.Models.Logging;
 
 namespace WZCatEars
 {
-    public record ModMetadata : AbstractModMetadata
+    public record ModMetadata : IModMetadata
     {
-        public override string ModGuid { get; init; } = "com.rairaitheraichu.wzcatears";
-        public override string Name { get; init; } = "Warzone Cat Ears";
-        public override string Author { get; init; } = "RaiRaiTheRaichu";
-        public override List<string>? Contributors { get; init; }
-        public override SemanticVersioning.Version Version { get; init; } = new("2.0.2");
-        public override SemanticVersioning.Range SptVersion { get; init; } = new("~4.0.0");
-        public override List<string>? Incompatibilities { get; init; }
-        public override Dictionary<string, SemanticVersioning.Range>? ModDependencies { get; init; }
-        public override string? Url { get; init; } = "https://github.com/RaiRaiTheRaichu/SPT_WZ-Cat-Ears-Mod";
-        public override bool? IsBundleMod { get; init; } = true;
-        public override string? License { get; init; } = "Apache License V2.0";
+        public string ModGuid { get; init; } = "com.rairaitheraichu.wzcatears";
+        public string Name { get; init; } = "Warzone Cat Ears";
+        public string Author { get; init; } = "RaiRaiTheRaichu";
+        public List<string>? Contributors { get; init; }
+        public SemanticVersioning.Version Version { get; init; } = new("2.1.0");
+        public SemanticVersioning.Range SptVersion { get; init; } = new("~4.1.0");
+        public List<string>? Incompatibilities { get; init; }
+        public Dictionary<string, SemanticVersioning.Range>? ModDependencies { get; init; }
+        public string? Url { get; init; } = "https://github.com/RaiRaiTheRaichu/SPT_WZ-Cat-Ears-Mod";
+        public bool? IsBundleMod { get; init; } = true;
+        public string? License { get; init; } = "Apache License V2.0";
+        public bool HasPrepatcher { get; init; } = false;
     }
 
-    [Injectable(TypePriority = OnLoadOrder.PostDBModLoader + 1)]
+    [Injectable(TypePriority = OnLoadOrder.Preload)]
     public class WZCatEars(
-        DatabaseServer databaseServer,
-        DatabaseService databaseService,
+        TemplateTable templateTable,
+        TradersTable tradersTable,
+        LocaleTable localeTable,
         ModHelper modHelper,
         ISptLogger<WZCatEars> logger) : IOnLoad
     {
@@ -40,7 +45,7 @@ namespace WZCatEars
         private Dictionary<string, ItemEntryType> ItemEntries = new Dictionary<string, ItemEntryType>();
         public string ModPath;
 
-        public Task OnLoad()
+        public Task OnLoadAsync(CancellationToken cancellationToken)
         {
             // Load config
             ModPath = modHelper.GetAbsolutePathToModFolder(Assembly.GetExecutingAssembly());
@@ -52,19 +57,25 @@ namespace WZCatEars
 
             GenerateItems();
 
+            cancellationToken.ThrowIfCancellationRequested();
+
             string[] files = Directory.GetFiles(System.IO.Path.Join(ModPath, "db", "locale"));
             
             if (files.Length > 0) 
                 GenerateLocalization(files);
 
+            cancellationToken.ThrowIfCancellationRequested();
+
             GenerateAssorts();
+
+            cancellationToken.ThrowIfCancellationRequested();
 
             return Task.CompletedTask;
         }
 
         private Task GenerateItems()
         {
-            var itemDatabase = databaseServer.GetTables().Templates.Items;
+            var itemDatabase = templateTable.Items;
 
             foreach (var itemEntry in ItemEntries)
             {
@@ -140,7 +151,7 @@ namespace WZCatEars
 
                 var localeFile = modHelper.GetJsonDataFromFile<Dictionary<string, string>>(localePath, localeJson);
 
-                if (databaseService.GetLocales().Global.TryGetValue(localeKey, out var lazyloadedValue))
+                if (localeTable.Global.TryGetValue(localeKey, out var lazyloadedValue))
                 {
                     lazyloadedValue.AddTransformer(lazyloadedLocaleData =>
                     {
@@ -152,14 +163,14 @@ namespace WZCatEars
             }
 
             // Ensure all language options at least have a locale entry, using `en` as a fallback
-            foreach (var langKey in databaseService.GetLocales().Global)
+            foreach (var langKey in localeTable.Global)
             {
                 if (!filenames.Contains(langKey.Key))
                 {
                     var localeFile = modHelper.GetJsonDataFromFile<Dictionary<string, string>>(
                         System.IO.Path.Join(ModPath, "db", "locale"), "en.json");
 
-                    if (databaseService.GetLocales().Global.TryGetValue(langKey.Key, out var lazyloadedValue))
+                    if (localeTable.Global.TryGetValue(langKey.Key, out var lazyloadedValue))
                     {
                         lazyloadedValue.AddTransformer(lazyloadedLocaleData =>
                         {
@@ -179,7 +190,7 @@ namespace WZCatEars
             {
                 foreach (var itemEntry in ItemEntries)
                 {
-                    var traderAssort = databaseServer.GetTables().Traders[ModConfig.AlternateTrade.TraderId].Assort;
+                    var traderAssort = tradersTable[ModConfig.AlternateTrade.TraderId].Assort;
 
                     Item newItemAssort = new()
                     {
@@ -212,7 +223,7 @@ namespace WZCatEars
 
             foreach (var itemEntry in ItemEntries)
             {
-                foreach (var trader in databaseServer.GetTables().Traders)
+                foreach (var trader in tradersTable)
                 {
                     if (trader.Value.Assort?.Items == null || trader.Value.Assort?.Items?.Count == 0)
                         continue;
@@ -249,7 +260,7 @@ namespace WZCatEars
                 }
 
                 // Handbook price
-                HandbookItem handbookEntry = databaseService.GetHandbook().Items.Find(entry
+                HandbookItem handbookEntry = templateTable.Handbook.Items.Find(entry
                     => entry.Id == itemEntry.Value.Template);
 
                 HandbookItem newHandbookEntry = new()
@@ -259,7 +270,7 @@ namespace WZCatEars
                     Price = handbookEntry.Price
                 };
 
-                databaseService.GetHandbook().Items.Add(newHandbookEntry);
+                templateTable.Handbook.Items.Add(newHandbookEntry);
             }
             return Task.CompletedTask;
         }

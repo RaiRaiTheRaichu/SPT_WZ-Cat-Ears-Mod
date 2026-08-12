@@ -1,11 +1,11 @@
-# Warzone Cat Ears v2.0.2
+# Warzone Cat Ears v2.1.0
 
 Author: RaiRaiTheRaichu
 
 Additional credits:
 - SamSWAT for the initial mod this is inherited from, "Crye Precision Airframe Helmet From Warzone".
 
-### ---BUILT FOR SPT VERSION 4.0.13---
+### ---BUILT FOR SPT VERSION 4.1.2---
 
 We all know SPT needs more accessories. What's the point of all the killing if you aren't going to look good while you do it?
 
@@ -19,13 +19,13 @@ Oh, and of course you don't have to forego protection just for style. Enabled by
 ## ---BUILD INFO---
 
 Requirements:
-- .NET 9.0
+- .NET 10.0
 
 The following packages installed:
-- SPTarkov.Common (`4.0.0`)
-- SPTarkov.DI (`4.0.0`)
-- SPTarkov.Reflection (`4.0.0`)
-- SPTarkov.Server.Core (`4.0.0`)
+- SPTarkov.Common (`4.1.0`)
+- SPTarkov.DI (`4.1.0`)
+- SPTarkov.Reflection (`4.1.0`)
+- SPTarkov.Server.Core (`4.1.0`)
 (You can select `Manage NuGet Packages...` within the Dependencies tab of Visual Studio to install them. Pay special attention to the version being installed, mods compiled with packages marked `4.0.13`, for example, will not run on any version below that.)
 
 Open WZCatEars.sln with Visual Studio and build the mod in Release mode.
@@ -41,7 +41,7 @@ I will try to keep this link accurate and up-to-date with the required bundles t
 ## ---INSTALL INFO---
 
 How to install:
-Drag and drop the included `SPT` folder from this zip into your SPT folder, allow it to merge with your existing folder.
+Drag and drop the included `SPT_Runtime` folder from this zip into your SPT folder, allow it to merge with your existing folder.
 
 If you're updating from an older version, please be sure to delete the old mod from your folder.
 
@@ -65,6 +65,9 @@ If you're updating from an older version, please be sure to delete the old mod f
 
 #### v2.0.2 Changelog:
 - Fixed an issue where assorts could fail to generate when using custom traders.
+
+#### v2.1.0 Changelog:
+- Update for compatibility with SPT 4.1.0+
 
 ## ---CONTACT---
 
